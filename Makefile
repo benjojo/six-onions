@@ -14,6 +14,7 @@ all: build
 .PHONY: build
 build: .GOPATH/.ok
 	$Q go install $(if $V,-v) $(VERSION_FLAGS) $(IMPORT_PATH)/onion-dns
+	$Q go install $(if $V,-v) $(VERSION_FLAGS) $(IMPORT_PATH)/tortransproxy
 
 ### Code not in the repository root? Another binary? Add to the path like this.
 # .PHONY: otherbin

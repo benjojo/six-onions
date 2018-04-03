@@ -63,6 +63,15 @@
 			"notests": true
 		},
 		{
+			"importpath": "golang.org/x/net/proxy",
+			"repository": "https://go.googlesource.com/net",
+			"vcs": "git",
+			"revision": "b68f30494add4df6bd8ef5e82803f308e7f7c59c",
+			"branch": "master",
+			"path": "/proxy",
+			"notests": true
+		},
+		{
 			"importpath": "golang.org/x/oauth2",
 			"repository": "https://go.googlesource.com/oauth2",
 			"vcs": "git",
