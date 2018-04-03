@@ -29,7 +29,10 @@ func realServerAddress(conn *net.TCPConn) (net.TCPAddr, *os.File, error) {
 
 	ip = addr.Addr[:]
 
-	return net.TCPAddr{IP: ip, Port: int(addr.Port)}, f, nil
+	p := (*[2]byte)(unsafe.Pointer(&addr.Port))
+	p2 := int(p[0])<<8 + int(p[1])
+
+	return net.TCPAddr{IP: ip, Port: p2}, f, nil
 }
 
 func getsockopt(s int, level int, name int, val unsafe.Pointer, vallen *uint32) (err error) {

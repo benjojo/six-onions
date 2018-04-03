@@ -17,7 +17,7 @@ func main() {
 		"the port that iptables will be redirecting connections to")
 	flag.Parse()
 
-	la, _ := net.ResolveTCPAddr("tcp6", fmt.Sprintf("[::1]:%d", *tport))
+	la, _ := net.ResolveTCPAddr("tcp6", fmt.Sprintf("[::]:%d", *tport))
 	l, err := net.ListenTCP("tcp6", la)
 	if err != nil {
 		log.Fatalf("Unable to listen on the transparent port %s",
@@ -57,9 +57,10 @@ func handleConn(c *net.TCPConn) {
 	toronionaddr :=
 		fmt.Sprintf("%s.onion", base32.StdEncoding.EncodeToString(toraddr))
 
-	log.Printf("Connection from %s to %s", c.RemoteAddr().String(), toronionaddr)
+	log.Printf("Connection from %s to %s:%d",
+		c.RemoteAddr().String(), toronionaddr, tc.Port)
 
-	d, err := proxy.SOCKS5("tcp", "localhost:9050", nil, nil)
+	d, err := proxy.SOCKS5("tcp", "localhost:9050", nil, proxy.Direct)
 	if err != nil {
 		log.Printf("Unable to recover address %s", err.Error())
 		return
