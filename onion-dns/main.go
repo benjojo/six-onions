@@ -70,7 +70,7 @@ func main() {
 		}
 
 		barr := make([]byte, 0)
-		barr = append(barr, 0x2a, 0x07, 0x15, 0x00, 0xFE, 0xD5)
+		barr = append(barr, 0x2a, 0x0c, 0x2f, 0x07, 0xFE, 0xD5)
 		barr = append(barr, b32...)
 		bip := net.IP(barr)
 
